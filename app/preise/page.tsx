@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const TIERS = [
   { range: "1–4 Mitarbeiter", price: "19", note: "pro Mitarbeiter / Monat" },
   { range: "5–10 Mitarbeiter", price: "14", note: "pro Mitarbeiter / Monat" },
-  { range: "ab 11 Mitarbeitern", price: "9", note: "pro Mitarbeiter / Monat, unbegrenzt" },
+  { range: "ab 11 Mitarbeitern", price: "9", note: "pro Mitarbeiter / Monat, ohne Obergrenze" },
 ];
 
 export default function PreisePage() {
