@@ -28,14 +28,19 @@ type ModuleDef = {
 // Icon-Komponenten (Funktionen) lassen sich nicht als Prop von einer Server-
 // an eine Client-Komponente reichen (React-RSC-Grenze) -- die Modul-Liste
 // lebt deshalb direkt hier statt als Prop von app/page.tsx zu kommen.
+// Feldnamen/-reihenfolge sind 1:1 aus den echten "Neu anlegen"-Formularen der
+// Software uebernommen (components/customer-form.tsx, inquiry-form.tsx,
+// quote-form.tsx, project-quick-form.tsx, appointment-quick-form.tsx,
+// task-form.tsx, invoice-form.tsx) -- keine erfundenen Felder.
 const MODULES: ModuleDef[] = [
   {
     icon: Users,
     title: "Kunden",
     description: "Alle Kontaktdaten, Historie und Dokumente an einem Ort — pro Kunde auf einen Blick.",
-    demoLabel: "So schnell ist ein Kunde angelegt",
+    demoLabel: "Formular „Neuer Kunde“",
     demoFields: [
-      { label: "Name", value: "Müller GmbH" },
+      { label: "Kundentyp", value: "Geschäftskunde" },
+      { label: "Firmenname", value: "Müller GmbH" },
       { label: "Ort", value: "Hamburg" },
     ],
     demoResult: "Kunde angelegt",
@@ -44,21 +49,23 @@ const MODULES: ModuleDef[] = [
     icon: Inbox,
     title: "Anfragen",
     description: "Vom ersten Kontakt bis zum Auftrag, mit frei konfigurierbarem Workflow.",
-    demoLabel: "So schnell ist eine Anfrage erfasst",
+    demoLabel: "Formular „Neue Anfrage“",
     demoFields: [
+      { label: "Kunde", value: "Müller GmbH" },
       { label: "Titel", value: "Wallbox-Installation" },
       { label: "Quelle", value: "Weiterempfehlung" },
     ],
-    demoResult: "Anfrage erfasst",
+    demoResult: "Anfrage angelegt",
   },
   {
     icon: FileText,
     title: "Angebote",
     description: "Positionen, MwSt. pro Position, Rabatte, Positions-Bibliothek und Versionierung.",
-    demoLabel: "So schnell ist ein Angebot erstellt",
+    demoLabel: "Formular „Neues Angebot“",
     demoFields: [
-      { label: "Position", value: "Elektroinstallation" },
-      { label: "Betrag", value: "1.850 €" },
+      { label: "Kunde", value: "Müller GmbH" },
+      { label: "Titel", value: "Elektroinstallation" },
+      { label: "Gültig bis", value: "30 Tage" },
     ],
     demoResult: "Angebot erstellt",
   },
@@ -66,10 +73,10 @@ const MODULES: ModuleDef[] = [
     icon: Briefcase,
     title: "Aufträge",
     description: "Laufende Arbeiten im Blick behalten, vom Angebot bis zum Abschluss.",
-    demoLabel: "So schnell ist ein Auftrag angelegt",
+    demoLabel: "Formular „Neuer Auftrag“",
     demoFields: [
-      { label: "Bezeichnung", value: "Bad-Sanierung Müller" },
-      { label: "Start", value: "03.09.2026" },
+      { label: "Kunde", value: "Müller GmbH" },
+      { label: "Titel", value: "Bad-Sanierung" },
     ],
     demoResult: "Auftrag angelegt",
   },
@@ -77,31 +84,34 @@ const MODULES: ModuleDef[] = [
     icon: Calendar,
     title: "Termine",
     description: "Kalender mit Monats-, Wochen- und Tagesansicht, Zuständigkeiten und Arbeitszeiten.",
-    demoLabel: "So schnell ist ein Termin eingetragen",
+    demoLabel: "Formular „Neuer Termin“",
     demoFields: [
+      { label: "Kunde", value: "Familie Schmidt" },
+      { label: "Titel", value: "Wallbox-Beratung" },
       { label: "Art", value: "Vor-Ort-Termin" },
-      { label: "Wann", value: "12.09., 14:00 Uhr" },
     ],
-    demoResult: "Termin eingetragen",
+    demoResult: "Termin gespeichert",
   },
   {
     icon: ListTodo,
     title: "Aufgaben",
     description: "Frei erstellbare To-dos, verknüpfbar mit Kunden, Angeboten oder Terminen.",
-    demoLabel: "So schnell ist eine Aufgabe erstellt",
+    demoLabel: "Formular „Neue Aufgabe“",
     demoFields: [
       { label: "Titel", value: "Material bestellen" },
-      { label: "Fällig", value: "Morgen" },
+      { label: "Fällig am", value: "Morgen" },
+      { label: "Priorität", value: "Hoch" },
     ],
-    demoResult: "Aufgabe erstellt",
+    demoResult: "Aufgabe angelegt",
   },
   {
     icon: Wallet,
     title: "Rechnungen",
     description: "PDF-Erstellung, E-Mail-Versand und automatisches Mahnwesen.",
-    demoLabel: "So schnell ist eine Rechnung erstellt",
+    demoLabel: "Formular „Neue Rechnung“",
     demoFields: [
-      { label: "Nummer", value: "RE-2026-014" },
+      { label: "Kunde", value: "Müller GmbH" },
+      { label: "Position", value: "Elektroinstallation" },
       { label: "Betrag", value: "1.850 €" },
     ],
     demoResult: "Rechnung erstellt",
@@ -110,10 +120,10 @@ const MODULES: ModuleDef[] = [
     icon: Radar,
     title: "Kunden-Radar",
     description: "Frühwarnsystem für Kunden, die länger nichts mehr von sich hören ließen.",
-    demoLabel: "So erkennt TaskOrga stille Kunden automatisch",
+    demoLabel: "Automatisch erkanntes Signal",
     demoFields: [
       { label: "Kunde", value: "Schmidt GmbH" },
-      { label: "Auffällig seit", value: "94 Tagen" },
+      { label: "Kein Kontakt seit", value: "94 Tagen" },
     ],
     demoResult: "Automatisch erkannt",
   },
@@ -121,8 +131,9 @@ const MODULES: ModuleDef[] = [
     icon: BarChart3,
     title: "Einblicke",
     description: "Frei baubare Diagramme und Kennzahlen zu jedem Datentyp in deinem System.",
-    demoLabel: "So schnell ist ein Diagramm gebaut",
+    demoLabel: "Formular „Neues Diagramm“",
     demoFields: [
+      { label: "Name", value: "Rechnungen nach Status" },
       { label: "Datentyp", value: "Rechnungen" },
       { label: "Gruppiert nach", value: "Status" },
     ],
@@ -182,9 +193,16 @@ function ExpandedCard({ module: m, onBack }: { module: ModuleDef; onBack: () => 
         <h3 className="mt-4 font-display text-lg font-semibold text-ink-900">{m.title}</h3>
         <p className="mt-1.5 text-sm text-ink-500">{m.description}</p>
 
-        <div className="mt-5 rounded-lg border border-dashed border-ink-100 bg-ink-50 p-4">
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-wider text-ink-300">{m.demoLabel}</p>
-          <AutoFillDemo fields={m.demoFields} resultLabel={m.demoResult} playKey={m.title} />
+        <div className="mt-5 overflow-hidden rounded-lg border border-ink-100 shadow-card">
+          <div className="flex items-center gap-1.5 border-b border-ink-100 bg-ink-50 px-3 py-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-danger/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-warning/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-success/60" />
+            <span className="ml-2 font-mono text-[11px] text-ink-300">{m.demoLabel}</span>
+          </div>
+          <div className="bg-surface p-4">
+            <AutoFillDemo fields={m.demoFields} resultLabel={m.demoResult} playKey={m.title} />
+          </div>
         </div>
 
         <button

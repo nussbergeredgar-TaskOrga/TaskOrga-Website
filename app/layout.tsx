@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { SplashScreen } from "@/components/splash-screen";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="font-body bg-surface text-ink-900 flex min-h-screen flex-col">
+        <SplashScreen />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
