@@ -1,29 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Check, type LucideIcon } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { Check } from "lucide-react";
 
 type Field = { label: string; value: string };
-type ResultPreview = { primary: string; secondary: string };
 
 // Spielt einmalig ein kurzes "Tippen"-Erlebnis ab (~5s je nach Feldlaenge):
 // jedes Feld fuellt sich Zeichen fuer Zeichen, dann erscheint eine kurze
-// Erfolgsmeldung -- gefolgt von einer kleinen Vorschau-Zeile, wie der neue
-// Datensatz jetzt in der echten Liste aussehen wuerde ("Ergebnis sichtbar
-// machen" statt nur einer Text-Bestaetigung). playKey aendert sich pro
-// geoeffneter Kachel und startet die Animation dadurch bei jedem Oeffnen
-// frisch von vorn.
+// Erfolgsmeldung -- gefolgt vom echten UI-Element aus der Software (Kachel/
+// Zeile/Mini-Diagramm, siehe resultPreview in feature-grid.tsx), wie der neue
+// Datensatz jetzt dort aussehen wuerde ("Ergebnis sichtbar machen" statt nur
+// einer Text-Bestaetigung). playKey aendert sich pro geoeffneter Kachel und
+// startet die Animation dadurch bei jedem Oeffnen frisch von vorn.
 export function AutoFillDemo({
-  icon: Icon,
   fields,
   resultLabel,
   resultPreview,
   playKey,
 }: {
-  icon: LucideIcon;
   fields: Field[];
   resultLabel: string;
-  resultPreview: ResultPreview;
+  resultPreview: ReactNode;
   playKey: string;
 }) {
   const [typed, setTyped] = useState<string[]>(() => fields.map(() => ""));
@@ -83,17 +80,11 @@ export function AutoFillDemo({
       </div>
 
       <div
-        className={`flex items-center gap-3 rounded-lg border border-ink-100 bg-ink-50 px-3 py-2.5 transition-all duration-500 delay-300 ${
+        className={`transition-all duration-500 delay-300 ${
           done ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
         }`}
       >
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-500 text-white">
-          <Icon size={15} strokeWidth={2} />
-        </span>
-        <span className="min-w-0">
-          <span className="block truncate text-sm font-medium text-ink-900">{resultPreview.primary}</span>
-          <span className="block truncate text-xs text-ink-500">{resultPreview.secondary}</span>
-        </span>
+        {resultPreview}
       </div>
     </div>
   );

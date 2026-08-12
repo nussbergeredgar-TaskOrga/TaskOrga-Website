@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowLeft,
   Users,
@@ -12,6 +12,8 @@ import {
   Wallet,
   Radar,
   BarChart3,
+  Building2,
+  CheckCircle2,
   type LucideIcon,
 } from "lucide-react";
 import { AutoFillDemo } from "@/components/auto-fill-demo";
@@ -23,7 +25,10 @@ type ModuleDef = {
   demoLabel: string;
   demoFields: { label: string; value: string }[];
   demoResult: string;
-  resultPreview: { primary: string; secondary: string };
+  // Echtes UI-Element aus der Software (Kundenkachel, Anfragen-Pipeline-Zeile,
+  // Mini-Diagramm, ...), nicht nur eine generische Text-Zeile -- zeigt nach
+  // der Anlegen-Animation, wie der Datensatz in der echten Software aussieht.
+  resultPreview: ReactNode;
 };
 
 // Icon-Komponenten (Funktionen) lassen sich nicht als Prop von einer Server-
@@ -45,7 +50,21 @@ const MODULES: ModuleDef[] = [
       { label: "Ort", value: "Hamburg" },
     ],
     demoResult: "Kunde angelegt",
-    resultPreview: { primary: "Müller GmbH", secondary: "Geschäftskunde · Hamburg" },
+    resultPreview: (
+      <div className="rounded-card border-l-4 border-l-brand-500 bg-surface p-4 shadow-card">
+        <div className="flex items-start justify-between">
+          <div>
+            <p className="text-sm font-display font-semibold text-ink-900">Müller GmbH</p>
+            <p className="mt-0.5 text-xs text-ink-500">Hamburg</p>
+          </div>
+          <Building2 size={16} className="shrink-0 text-ink-300" />
+        </div>
+        <div className="mt-3 flex gap-3 font-mono text-[11px] text-ink-500">
+          <span>0 Aufträge</span>
+          <span>0 Rechnungen</span>
+        </div>
+      </div>
+    ),
   },
   {
     icon: Inbox,
@@ -58,7 +77,26 @@ const MODULES: ModuleDef[] = [
       { label: "Quelle", value: "Weiterempfehlung" },
     ],
     demoResult: "Anfrage angelegt",
-    resultPreview: { primary: "Wallbox-Installation", secondary: "Müller GmbH · Weiterempfehlung" },
+    resultPreview: (
+      <div className="space-y-2">
+        <div className="rounded-lg border border-ink-100 bg-surface p-3">
+          <div className="mb-2 flex items-center justify-between">
+            <span className="text-xs font-display font-semibold text-ink-900">Neu</span>
+            <span className="font-mono text-[11px] text-ink-300">1</span>
+          </div>
+          <div className="rounded-lg border-l-4 border-l-brand-500 bg-ink-50 px-2.5 py-2 text-xs">
+            <span className="font-medium text-ink-900">Wallbox-Installation</span>
+            <span className="ml-2 text-ink-500">Müller GmbH</span>
+          </div>
+        </div>
+        <div className="rounded-lg border border-ink-100 bg-surface px-3 py-2 opacity-50">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-display font-semibold text-ink-900">Rückruf geplant</span>
+            <span className="font-mono text-[11px] text-ink-300">0</span>
+          </div>
+        </div>
+      </div>
+    ),
   },
   {
     icon: FileText,
@@ -71,7 +109,12 @@ const MODULES: ModuleDef[] = [
       { label: "Gültig bis", value: "30 Tage" },
     ],
     demoResult: "Angebot erstellt",
-    resultPreview: { primary: "Elektroinstallation", secondary: "Müller GmbH · Gültig 30 Tage" },
+    resultPreview: (
+      <div className="rounded-lg border-l-4 border-l-brand-500 bg-ink-50 px-3 py-2.5 text-xs">
+        <p className="font-medium text-ink-900">Elektroinstallation</p>
+        <p className="mt-0.5 text-ink-500">Müller GmbH · Gültig 30 Tage</p>
+      </div>
+    ),
   },
   {
     icon: Briefcase,
@@ -83,7 +126,16 @@ const MODULES: ModuleDef[] = [
       { label: "Titel", value: "Bad-Sanierung" },
     ],
     demoResult: "Auftrag angelegt",
-    resultPreview: { primary: "Bad-Sanierung", secondary: "Müller GmbH" },
+    resultPreview: (
+      <div className="rounded-card border-l-4 border-l-brand-500 bg-surface p-4 shadow-card">
+        <p className="text-sm font-display font-semibold text-ink-900">Bad-Sanierung</p>
+        <p className="mt-0.5 text-xs text-ink-500">Müller GmbH</p>
+        <div className="mt-3 flex items-center justify-between">
+          <span className="font-mono text-[11px] text-ink-500">0 Aufgaben</span>
+          <span className="text-[11px] font-medium text-ink-700">In Bearbeitung</span>
+        </div>
+      </div>
+    ),
   },
   {
     icon: Calendar,
@@ -96,7 +148,15 @@ const MODULES: ModuleDef[] = [
       { label: "Art", value: "Vor-Ort-Termin" },
     ],
     demoResult: "Termin gespeichert",
-    resultPreview: { primary: "Wallbox-Beratung", secondary: "Familie Schmidt · Vor-Ort-Termin" },
+    resultPreview: (
+      <div className="flex items-center justify-between gap-3 rounded-lg border-l-4 border-l-turquoise-500 bg-ink-50 px-3 py-2.5 text-xs">
+        <div>
+          <span className="font-medium text-ink-900">Wallbox-Beratung</span>
+          <span className="ml-2 text-ink-500">Familie Schmidt</span>
+        </div>
+        <span className="shrink-0 text-ink-500">Vor-Ort-Termin</span>
+      </div>
+    ),
   },
   {
     icon: ListTodo,
@@ -109,7 +169,15 @@ const MODULES: ModuleDef[] = [
       { label: "Priorität", value: "Hoch" },
     ],
     demoResult: "Aufgabe angelegt",
-    resultPreview: { primary: "Material bestellen", secondary: "Fällig: Morgen · Priorität Hoch" },
+    resultPreview: (
+      <div className="flex items-center gap-2.5 rounded-lg border-l-4 border-l-warning bg-ink-50 px-3 py-2.5 text-xs">
+        <CheckCircle2 size={16} className="shrink-0 text-ink-300" />
+        <div>
+          <span className="font-medium text-ink-900">Material bestellen</span>
+          <span className="ml-2 text-ink-500">Fällig: Morgen</span>
+        </div>
+      </div>
+    ),
   },
   {
     icon: Wallet,
@@ -122,7 +190,18 @@ const MODULES: ModuleDef[] = [
       { label: "Betrag", value: "1.850 €" },
     ],
     demoResult: "Rechnung erstellt",
-    resultPreview: { primary: "Elektroinstallation", secondary: "Müller GmbH · 1.850 €" },
+    resultPreview: (
+      <div className="flex items-center justify-between rounded-lg border-l-4 border-l-warning bg-surface px-3 py-2.5 text-xs shadow-card">
+        <div>
+          <p className="font-medium text-ink-900">Elektroinstallation</p>
+          <p className="text-ink-500">Müller GmbH</p>
+        </div>
+        <div className="text-right">
+          <p className="font-mono font-medium text-ink-900">1.850 €</p>
+          <p className="text-ink-500">Offen</p>
+        </div>
+      </div>
+    ),
   },
   {
     icon: Radar,
@@ -134,7 +213,15 @@ const MODULES: ModuleDef[] = [
       { label: "Kein Kontakt seit", value: "94 Tagen" },
     ],
     demoResult: "Automatisch erkannt",
-    resultPreview: { primary: "Schmidt GmbH", secondary: "Kein Kontakt seit 94 Tagen" },
+    resultPreview: (
+      <div className="flex items-center gap-2.5 rounded-lg border-l-4 border-l-warning bg-ink-50 px-3 py-2.5 text-xs">
+        <Radar size={16} className="shrink-0 text-warning" />
+        <div>
+          <span className="font-medium text-ink-900">Schmidt GmbH</span>
+          <span className="ml-2 text-ink-500">Kein Kontakt seit 94 Tagen</span>
+        </div>
+      </div>
+    ),
   },
   {
     icon: BarChart3,
@@ -147,7 +234,24 @@ const MODULES: ModuleDef[] = [
       { label: "Gruppiert nach", value: "Status" },
     ],
     demoResult: "Diagramm erstellt",
-    resultPreview: { primary: "Rechnungen nach Status", secondary: "Rechnungen · gruppiert nach Status" },
+    resultPreview: (
+      <div className="rounded-card border border-ink-100 bg-surface p-3 shadow-card">
+        <svg viewBox="0 0 220 90" className="h-16 w-full" aria-hidden="true">
+          <defs>
+            <linearGradient id="website-demo-chart-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#2F5FFF" />
+              <stop offset="100%" stopColor="#0FB9AE" />
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="80" x2="220" y2="80" stroke="#E8EAED" strokeDasharray="3 3" />
+          <rect x="20" y="40" width="28" height="40" rx="5" fill="url(#website-demo-chart-gradient)" />
+          <rect x="66" y="16" width="28" height="64" rx="5" fill="url(#website-demo-chart-gradient)" />
+          <rect x="112" y="52" width="28" height="28" rx="5" fill="url(#website-demo-chart-gradient)" />
+          <rect x="158" y="30" width="28" height="50" rx="5" fill="url(#website-demo-chart-gradient)" />
+        </svg>
+        <p className="mt-1.5 text-center text-[11px] text-ink-500">Rechnungen nach Status</p>
+      </div>
+    ),
   },
 ];
 
@@ -224,7 +328,6 @@ function ExpandedCard({ module: m, onBack }: { module: ModuleDef; onBack: () => 
           </div>
           <div className="bg-surface p-4">
             <AutoFillDemo
-              icon={m.icon}
               fields={m.demoFields}
               resultLabel={m.demoResult}
               resultPreview={m.resultPreview}
