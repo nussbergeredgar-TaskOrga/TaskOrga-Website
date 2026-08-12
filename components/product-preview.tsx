@@ -1,11 +1,13 @@
+import { Parallax } from "@/components/parallax";
+
 // Abstrakte, gestalterische Andeutung des Dashboards (keine echte Bildschirmaufnahme) --
 // vermittelt "Software-Produkt" rein per CSS, ohne einen falschen Screenshot zu behaupten.
 export function ProductPreview() {
   const bars = [40, 65, 50, 80, 60, 95];
   return (
     <div className="relative mx-auto w-full max-w-lg">
-      <div className="absolute -top-10 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl" />
-      <div className="absolute -bottom-10 right-0 h-48 w-48 rounded-full bg-turquoise-500/20 blur-3xl" />
+      <Parallax speed={0.12} className="absolute -top-10 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-500/20 blur-3xl" />
+      <Parallax speed={0.22} className="absolute -bottom-10 right-0 h-48 w-48 rounded-full bg-turquoise-500/20 blur-3xl" />
 
       <div className="relative rounded-card border border-ink-100 bg-surface p-5 shadow-cardHover">
         <div className="flex items-center gap-1.5">
