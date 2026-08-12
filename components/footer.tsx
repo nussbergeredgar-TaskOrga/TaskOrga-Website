@@ -21,6 +21,12 @@ export function Footer() {
           <Link href="/login" className="hover:text-brand-700">
             Anmelden
           </Link>
+          <Link href="/impressum" className="hover:text-brand-700">
+            Impressum
+          </Link>
+          <Link href="/datenschutz" className="hover:text-brand-700">
+            Datenschutz
+          </Link>
         </nav>
         <p>© {new Date().getFullYear()} TaskOrga</p>
       </div>
