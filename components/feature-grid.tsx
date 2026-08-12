@@ -23,6 +23,7 @@ type ModuleDef = {
   demoLabel: string;
   demoFields: { label: string; value: string }[];
   demoResult: string;
+  resultPreview: { primary: string; secondary: string };
 };
 
 // Icon-Komponenten (Funktionen) lassen sich nicht als Prop von einer Server-
@@ -44,6 +45,7 @@ const MODULES: ModuleDef[] = [
       { label: "Ort", value: "Hamburg" },
     ],
     demoResult: "Kunde angelegt",
+    resultPreview: { primary: "Müller GmbH", secondary: "Geschäftskunde · Hamburg" },
   },
   {
     icon: Inbox,
@@ -56,6 +58,7 @@ const MODULES: ModuleDef[] = [
       { label: "Quelle", value: "Weiterempfehlung" },
     ],
     demoResult: "Anfrage angelegt",
+    resultPreview: { primary: "Wallbox-Installation", secondary: "Müller GmbH · Weiterempfehlung" },
   },
   {
     icon: FileText,
@@ -68,6 +71,7 @@ const MODULES: ModuleDef[] = [
       { label: "Gültig bis", value: "30 Tage" },
     ],
     demoResult: "Angebot erstellt",
+    resultPreview: { primary: "Elektroinstallation", secondary: "Müller GmbH · Gültig 30 Tage" },
   },
   {
     icon: Briefcase,
@@ -79,6 +83,7 @@ const MODULES: ModuleDef[] = [
       { label: "Titel", value: "Bad-Sanierung" },
     ],
     demoResult: "Auftrag angelegt",
+    resultPreview: { primary: "Bad-Sanierung", secondary: "Müller GmbH" },
   },
   {
     icon: Calendar,
@@ -91,6 +96,7 @@ const MODULES: ModuleDef[] = [
       { label: "Art", value: "Vor-Ort-Termin" },
     ],
     demoResult: "Termin gespeichert",
+    resultPreview: { primary: "Wallbox-Beratung", secondary: "Familie Schmidt · Vor-Ort-Termin" },
   },
   {
     icon: ListTodo,
@@ -103,6 +109,7 @@ const MODULES: ModuleDef[] = [
       { label: "Priorität", value: "Hoch" },
     ],
     demoResult: "Aufgabe angelegt",
+    resultPreview: { primary: "Material bestellen", secondary: "Fällig: Morgen · Priorität Hoch" },
   },
   {
     icon: Wallet,
@@ -115,6 +122,7 @@ const MODULES: ModuleDef[] = [
       { label: "Betrag", value: "1.850 €" },
     ],
     demoResult: "Rechnung erstellt",
+    resultPreview: { primary: "Elektroinstallation", secondary: "Müller GmbH · 1.850 €" },
   },
   {
     icon: Radar,
@@ -126,6 +134,7 @@ const MODULES: ModuleDef[] = [
       { label: "Kein Kontakt seit", value: "94 Tagen" },
     ],
     demoResult: "Automatisch erkannt",
+    resultPreview: { primary: "Schmidt GmbH", secondary: "Kein Kontakt seit 94 Tagen" },
   },
   {
     icon: BarChart3,
@@ -138,12 +147,14 @@ const MODULES: ModuleDef[] = [
       { label: "Gruppiert nach", value: "Status" },
     ],
     demoResult: "Diagramm erstellt",
+    resultPreview: { primary: "Rechnungen nach Status", secondary: "Rechnungen · gruppiert nach Status" },
   },
 ];
 
 // Klick auf eine Kachel: Grid weicht einer einzelnen, zentrierten Kachel mit
 // einer kurzen Auto-Ausfuell-Animation darunter (~5s, siehe AutoFillDemo).
-// "Zurueck" schliesst sie wieder und zeigt das volle Grid.
+// "Zurueck" schliesst sie wieder und zeigt das volle Grid -- ein Klick auf die
+// geoeffnete Kachel selbst (wie beim Oeffnen) tut dasselbe.
 export function FeatureGrid() {
   const [openTitle, setOpenTitle] = useState<string | null>(null);
   const active = MODULES.find((m) => m.title === openTitle) ?? null;
@@ -186,14 +197,25 @@ function ExpandedCard({ module: m, onBack }: { module: ModuleDef; onBack: () => 
         shown ? "scale-100 opacity-100" : "scale-95 opacity-0"
       }`}
     >
-      <div className="rounded-card border border-brand-500/30 bg-surface p-6 shadow-cardHover">
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={onBack}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") onBack();
+        }}
+        className="cursor-pointer rounded-card border border-brand-500/30 bg-surface p-6 shadow-cardHover"
+      >
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-500 text-white">
           <m.icon size={20} strokeWidth={2} />
         </div>
         <h3 className="mt-4 font-display text-lg font-semibold text-ink-900">{m.title}</h3>
         <p className="mt-1.5 text-sm text-ink-500">{m.description}</p>
 
-        <div className="mt-5 overflow-hidden rounded-lg border border-ink-100 shadow-card">
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="mt-5 cursor-default overflow-hidden rounded-lg border border-ink-100 shadow-card"
+        >
           <div className="flex items-center gap-1.5 border-b border-ink-100 bg-ink-50 px-3 py-2">
             <span className="h-2.5 w-2.5 rounded-full bg-danger/60" />
             <span className="h-2.5 w-2.5 rounded-full bg-warning/60" />
@@ -201,7 +223,13 @@ function ExpandedCard({ module: m, onBack }: { module: ModuleDef; onBack: () => 
             <span className="ml-2 font-mono text-[11px] text-ink-300">{m.demoLabel}</span>
           </div>
           <div className="bg-surface p-4">
-            <AutoFillDemo fields={m.demoFields} resultLabel={m.demoResult} playKey={m.title} />
+            <AutoFillDemo
+              icon={m.icon}
+              fields={m.demoFields}
+              resultLabel={m.demoResult}
+              resultPreview={m.resultPreview}
+              playKey={m.title}
+            />
           </div>
         </div>
 
