@@ -32,7 +32,7 @@ export default function DemoPage() {
             E-Mail — wir melden uns kurzfristig mit Terminvorschlägen.
           </p>
           <a
-            href="mailto:hallo@taskorga.de"
+            href="mailto:info@taskorga.de"
             className="mt-4 inline-block rounded-lg bg-brand-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-600"
           >
             E-Mail schreiben
