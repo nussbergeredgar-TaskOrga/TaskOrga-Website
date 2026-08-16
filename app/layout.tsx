@@ -28,7 +28,7 @@ const siteUrl = "https://taskorga.de";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "TaskOrga – Software für Handwerksbetriebe",
+    default: "TaskOrga – Software für Selbstständige & kleine Unternehmen",
     template: "%s – TaskOrga",
   },
   description:
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_DE",
     siteName: "TaskOrga",
-    title: "TaskOrga – Software für Handwerksbetriebe",
+    title: "TaskOrga – Software für Selbstständige & kleine Unternehmen",
     description:
       "Kunden, Anfragen, Angebote, Aufträge, Rechnungen, Termine und Aufgaben an einem Ort. Weniger Büro. Mehr Business.",
   },

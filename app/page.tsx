@@ -35,7 +35,7 @@ export default function HomePage() {
             <Reveal>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-ink-100 bg-surface px-3 py-1 font-mono text-[11px] text-ink-500">
                 <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                Software für Handwerks- &amp; Dienstleistungsbetriebe
+                Software für Selbstständige &amp; kleine Unternehmen
               </span>
             </Reveal>
             <Reveal delay={80}>
