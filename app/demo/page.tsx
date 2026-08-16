@@ -20,7 +20,7 @@ export default function DemoPage() {
       {calendlyUrl ? (
         <div className="mt-10 overflow-hidden rounded-card border border-ink-100 shadow-card">
           <iframe
-            src={`${calendlyUrl}?hide_gdpr_banner=1`}
+            src={`${calendlyUrl}?hide_gdpr_banner=1&locale=de`}
             title="Demo-Termin buchen"
             className="h-[700px] w-full"
           />
