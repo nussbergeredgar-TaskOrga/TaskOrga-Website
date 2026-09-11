@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackLink } from "@/components/back-link";
 
 export const metadata: Metadata = {
   title: "Impressum",
@@ -8,7 +9,8 @@ export const metadata: Metadata = {
 export default function ImpressumPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6">
-      <h1 className="font-display text-3xl font-semibold text-ink-900">Impressum</h1>
+      <BackLink />
+      <h1 className="mt-4 font-display text-3xl font-semibold text-ink-900">Impressum</h1>
       <p className="mt-2 text-sm text-ink-500">Angaben gemäß § 5 DDG · Stand: 11. September 2026</p>
 
       <div className="mt-8 space-y-6 text-sm leading-relaxed text-ink-700">
