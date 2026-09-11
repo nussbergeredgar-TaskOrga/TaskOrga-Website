@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+// AGB und AVV sind Vertragsdokumente der App (dort wird bei der Registrierung
+// auch tatsaechlich zugestimmt) -- hier bewusst dorthin verlinkt statt einer
+// zweiten, potenziell abweichenden Kopie, genau wie /login und /registrieren
+// schon zur App weiterleiten.
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://taskorga-v2pz.vercel.app";
+
 export function Footer() {
   return (
     <footer className="border-t border-ink-100">
@@ -23,6 +29,9 @@ export function Footer() {
           </Link>
           <Link href="/impressum" className="hover:text-brand-700">
             Impressum
+          </Link>
+          <Link href={`${appUrl}/agb`} className="hover:text-brand-700">
+            AGB
           </Link>
           <Link href="/datenschutz" className="hover:text-brand-700">
             Datenschutz

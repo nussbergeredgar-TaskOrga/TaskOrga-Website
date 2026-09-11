@@ -13,16 +13,17 @@ export default function DatenschutzPage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6">
       <h1 className="font-display text-3xl font-semibold text-ink-900">Datenschutzerklärung</h1>
+      <p className="mt-2 text-sm text-ink-500">Stand: 11. September 2026</p>
 
       <div className="mt-8 space-y-6 text-sm leading-relaxed text-ink-700">
         <section>
           <H2>Verantwortlicher</H2>
           <p className="mt-1">
-            Edgar Nussberger
+            TaskOrga, Inhaber: Edgar Nussberger
             <br />
-            In der Mudersbach 6
+            Am Kirchberger Weg 28
             <br />
-            55469 Mutterschied
+            55471 Külz
             <br />
             Deutschland
             <br />
@@ -41,7 +42,10 @@ export default function DatenschutzPage() {
             automatisch technische Informationen (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs,
             aufgerufene Seite, verwendeter Browser) in Server-Logfiles verarbeitet. Rechtsgrundlage
             ist unser berechtigtes Interesse an einem sicheren und funktionsfähigen Betrieb der
-            Webseite (Art. 6 Abs. 1 lit. f DSGVO).
+            Webseite (Art. 6 Abs. 1 lit. f DSGVO). Vercel Inc. hat seinen Sitz in den USA; soweit
+            dadurch personenbezogene Daten in ein Drittland übermittelt werden, erfolgt dies auf
+            Grundlage von EU-Standardvertragsklauseln (Art. 46 DSGVO) und, soweit Vercel
+            zertifiziert ist, zusätzlich auf Grundlage des EU-US Data Privacy Framework.
           </p>
         </section>
 
