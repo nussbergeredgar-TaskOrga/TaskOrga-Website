@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CalendlyEmbed } from "@/components/calendly-embed";
 
 export const metadata: Metadata = {
   title: "Demo buchen",
@@ -18,13 +19,7 @@ export default function DemoPage() {
       </div>
 
       {calendlyUrl ? (
-        <div className="mt-10 overflow-hidden rounded-card border border-ink-100 shadow-card">
-          <iframe
-            src={`${calendlyUrl}?hide_gdpr_banner=1&locale=de`}
-            title="Demo-Termin buchen"
-            className="h-[700px] w-full"
-          />
-        </div>
+        <CalendlyEmbed calendlyUrl={calendlyUrl} />
       ) : (
         <div className="mt-10 rounded-card border border-dashed border-ink-100 bg-ink-50 p-8 text-center">
           <p className="text-sm text-ink-500">

@@ -62,13 +62,15 @@ export default function DatenschutzPage() {
         <section>
           <H2>Terminbuchung (Calendly)</H2>
           <p className="mt-1">
-            Sofern wir auf der Seite &bdquo;Demo buchen&ldquo; eine Terminbuchung anbieten, nutzen
-            wir dafür den Dienst Calendly (Calendly LLC, USA). Beim Öffnen dieser Seite wird eine
-            Verbindung zu Calendly-Servern aufgebaut; dabei können Daten in die USA übertragen
-            werden, abgesichert über die von Calendly bereitgestellten Standardvertragsklauseln.
-            Rechtsgrundlage ist deine Einwilligung durch aktive Nutzung der Terminbuchung (Art. 6
-            Abs. 1 lit. a DSGVO). Die von dir bei der Buchung angegebenen Daten (Name, E-Mail,
-            gewünschter Termin) werden ausschließlich zur Terminvereinbarung verwendet.
+            Auf der Seite „Demo buchen" nutzen wir für die Terminbuchung den Dienst Calendly
+            (Calendly LLC, USA). Das Buchungsformular wird erst geladen, wenn du explizit auf
+            „Terminbuchung laden und Calendly zustimmen" klickst — erst dann wird eine Verbindung
+            zu Calendly-Servern aufgebaut. Dabei können Daten in die USA übertragen werden,
+            abgesichert über die von Calendly bereitgestellten Standardvertragsklauseln.
+            Rechtsgrundlage ist deine Einwilligung durch diesen Klick (Art. 6 Abs. 1 lit. a
+            DSGVO), die für die Zukunft keine Wirkung mehr hat, sobald du die Seite verlässt oder
+            neu lädst. Die von dir bei der Buchung angegebenen Daten (Name, E-Mail, gewünschter
+            Termin) werden ausschließlich zur Terminvereinbarung verwendet.
           </p>
         </section>
 
