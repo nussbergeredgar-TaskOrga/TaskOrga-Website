@@ -4,7 +4,7 @@ import Link from "next/link";
 // auch tatsaechlich zugestimmt) -- hier bewusst dorthin verlinkt statt einer
 // zweiten, potenziell abweichenden Kopie, genau wie /login und /registrieren
 // schon zur App weiterleiten.
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://taskorga-v2pz.vercel.app";
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.taskorga.de";
 
 export function Footer() {
   return (

@@ -10,6 +10,6 @@ export const dynamic = "force-dynamic";
 // der App, damit es nur eine einzige Auth-Logik gibt (siehe Plan). Fuer
 // Besucher fuehlt sich taskorga.de/login trotzdem wie ein normaler Login an.
 export default function LoginRedirectPage() {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://taskorga-v2pz.vercel.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.taskorga.de";
   redirect(`${appUrl}/login`);
 }
