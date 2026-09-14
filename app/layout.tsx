@@ -50,10 +50,36 @@ export const metadata: Metadata = {
   },
 };
 
+// Hilft Google, die Seite als konkretes Software-Produkt statt als generische
+// Seite einzuordnen (Grundlage fuer Rich-Snippets, z.B. Preis-Anzeige direkt
+// im Suchergebnis). Startpreis entspricht der guenstigsten Staffel-Stufe auf
+// /preise (19 € je Mitarbeiter/Monat fuer die ersten 4 Mitarbeiter).
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "TaskOrga",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: siteUrl,
+  description:
+    "Kunden, Anfragen, Angebote, Aufträge, Rechnungen, Termine und Aufgaben an einem Ort für Selbstständige und kleine Unternehmen.",
+  offers: {
+    "@type": "Offer",
+    price: "19",
+    priceCurrency: "EUR",
+    priceValidUntil: "2027-12-31",
+    url: `${siteUrl}/preise`,
+  },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="font-body bg-surface text-ink-900 flex min-h-screen flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <SplashScreen />
         <Nav />
         <main className="flex-1">{children}</main>
