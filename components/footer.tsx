@@ -18,6 +18,18 @@ export function Footer() {
           <Link href="/#funktionen" className="hover:text-brand-700">
             Funktionen
           </Link>
+          <Link href="/rechnungsprogramm-kleinunternehmer" className="hover:text-brand-700">
+            Rechnungsprogramm
+          </Link>
+          <Link href="/angebote-software" className="hover:text-brand-700">
+            Angebote schreiben
+          </Link>
+          <Link href="/kundenverwaltung" className="hover:text-brand-700">
+            Kundenverwaltung
+          </Link>
+          <Link href="/auftragsverwaltung" className="hover:text-brand-700">
+            Auftragsverwaltung
+          </Link>
           <Link href="/preise" className="hover:text-brand-700">
             Preise
           </Link>
