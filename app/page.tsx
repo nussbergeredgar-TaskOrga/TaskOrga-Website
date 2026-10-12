@@ -1,8 +1,35 @@
 import Link from "next/link";
-import { Sparkles, Palette, ShieldCheck } from "lucide-react";
+import { Sparkles, Palette, ShieldCheck, Wallet, FileText, Users, Briefcase, ArrowRight } from "lucide-react";
 import { ProductPreview } from "@/components/product-preview";
 import { Reveal } from "@/components/reveal";
 import { FeatureGrid } from "@/components/feature-grid";
+
+const SOLUTIONS = [
+  {
+    href: "/rechnungsprogramm-kleinunternehmer",
+    icon: Wallet,
+    title: "Rechnungsprogramm für Kleinunternehmer",
+    description: "Rechnungen in Minuten, Kleinunternehmerregelung nach §19 UStG und automatisches Mahnwesen.",
+  },
+  {
+    href: "/angebote-software",
+    icon: FileText,
+    title: "Angebote schreiben",
+    description: "Positionen, Rabatte, Positions-Bibliothek und Versionierung — vom Angebot direkt zum Auftrag.",
+  },
+  {
+    href: "/kundenverwaltung",
+    icon: Users,
+    title: "Kundenverwaltung für Selbstständige",
+    description: "Kunden, Anfragen und Historie an einem Ort — mit Frühwarnung, wenn ein Kunde inaktiv wird.",
+  },
+  {
+    href: "/auftragsverwaltung",
+    icon: Briefcase,
+    title: "Auftragsverwaltung für Dienstleister",
+    description: "Aufträge, Zeiterfassung, Termine und Aufgaben — vom Angebot bis zur Rechnung.",
+  },
+];
 
 const HIGHLIGHTS = [
   {
@@ -103,22 +130,54 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section id="loesungen" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <Reveal>
-          <h2 className="font-display text-2xl font-semibold text-ink-900">Was TaskOrga besonders macht</h2>
+          <h2 className="font-display text-2xl font-semibold text-ink-900">Lösungen für deinen Alltag</h2>
+          <p className="mt-2 max-w-2xl text-sm text-ink-500">
+            Egal ob Rechnungen, Angebote, Kunden oder Aufträge — hier siehst du, wie TaskOrga dir
+            bei der jeweiligen Aufgabe konkret hilft.
+          </p>
         </Reveal>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-          {HIGHLIGHTS.map((h, i) => (
-            <Reveal key={h.title} delay={i * 120}>
-              <div className="rounded-card border border-ink-100 p-6 shadow-card">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-turquoise-500 text-white">
-                  <h.icon size={20} strokeWidth={2} />
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {SOLUTIONS.map((s, i) => (
+            <Reveal key={s.href} delay={i * 100}>
+              <Link
+                href={s.href}
+                className="group flex h-full flex-col rounded-card border border-ink-100 p-6 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-cardHover"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand-500 group-hover:text-white">
+                  <s.icon size={20} strokeWidth={2} />
                 </div>
-                <h3 className="mt-4 font-display font-semibold text-ink-900">{h.title}</h3>
-                <p className="mt-2 text-sm text-ink-500">{h.description}</p>
-              </div>
+                <h3 className="mt-4 font-display font-semibold text-ink-900">{s.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-ink-500">{s.description}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-700">
+                  Mehr erfahren
+                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-ink-100">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <Reveal>
+            <h2 className="font-display text-2xl font-semibold text-ink-900">Was TaskOrga besonders macht</h2>
+          </Reveal>
+          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {HIGHLIGHTS.map((h, i) => (
+              <Reveal key={h.title} delay={i * 120}>
+                <div className="rounded-card border border-ink-100 p-6 shadow-card">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-turquoise-500 text-white">
+                    <h.icon size={20} strokeWidth={2} />
+                  </div>
+                  <h3 className="mt-4 font-display font-semibold text-ink-900">{h.title}</h3>
+                  <p className="mt-2 text-sm text-ink-500">{h.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
