@@ -1,35 +1,9 @@
 import Link from "next/link";
-import { Sparkles, Palette, ShieldCheck, Wallet, FileText, Users, Briefcase, ArrowRight } from "lucide-react";
+import { Sparkles, Palette, ShieldCheck, ArrowRight } from "lucide-react";
 import { ProductPreview } from "@/components/product-preview";
 import { Reveal } from "@/components/reveal";
 import { FeatureGrid } from "@/components/feature-grid";
-
-const SOLUTIONS = [
-  {
-    href: "/rechnungsprogramm-kleinunternehmer",
-    icon: Wallet,
-    title: "Rechnungsprogramm für Kleinunternehmer",
-    description: "Rechnungen in Minuten, Kleinunternehmerregelung nach §19 UStG und automatisches Mahnwesen.",
-  },
-  {
-    href: "/angebote-software",
-    icon: FileText,
-    title: "Angebote schreiben",
-    description: "Positionen, Rabatte, Positions-Bibliothek und Versionierung — vom Angebot direkt zum Auftrag.",
-  },
-  {
-    href: "/kundenverwaltung",
-    icon: Users,
-    title: "Kundenverwaltung für Selbstständige",
-    description: "Kunden, Anfragen und Historie an einem Ort — mit Frühwarnung, wenn ein Kunde inaktiv wird.",
-  },
-  {
-    href: "/auftragsverwaltung",
-    icon: Briefcase,
-    title: "Auftragsverwaltung für Dienstleister",
-    description: "Aufträge, Zeiterfassung, Termine und Aufgaben — vom Angebot bis zur Rechnung.",
-  },
-];
+import { SOLUTIONS } from "@/lib/solutions";
 
 const HIGHLIGHTS = [
   {
@@ -130,7 +104,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="loesungen" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section id="loesungen" className="mx-auto max-w-6xl scroll-mt-16 px-4 py-16 sm:px-6">
         <Reveal>
           <h2 className="font-display text-2xl font-semibold text-ink-900">Lösungen für deinen Alltag</h2>
           <p className="mt-2 max-w-2xl text-sm text-ink-500">

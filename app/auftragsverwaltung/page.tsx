@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Briefcase, Clock, Calendar, ListTodo } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { HomeLink } from "@/components/home-link";
 
 export const metadata: Metadata = {
   title: "Auftragsverwaltung für Dienstleister",
@@ -54,6 +55,7 @@ const FAQ = [
 export default function AuftragsverwaltungPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+      <HomeLink />
       <Reveal>
         <div className="text-center">
           <h1 className="font-display text-3xl font-semibold text-ink-900 sm:text-4xl">
