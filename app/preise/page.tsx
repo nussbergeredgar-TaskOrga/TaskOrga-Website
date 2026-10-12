@@ -13,6 +13,17 @@ const TIERS = [
   { range: "ab 11 Mitarbeitern", price: "9", note: "pro Mitarbeiter / Monat, ohne Obergrenze" },
 ];
 
+// Gestaffelt und kumulativ, wie in den FAQ unten beschrieben (und in
+// lib/subscription-pricing.ts der App): Stufe richtet sich nach der Position
+// des Mitarbeiters, nicht nach der Gesamtzahl.
+function monthlyPrice(employees: number): number {
+  let total = 0;
+  for (let i = 1; i <= employees; i++) total += i <= 4 ? 19 : i <= 10 ? 14 : 9;
+  return total;
+}
+
+const EXAMPLE_TEAM_SIZES = [1, 3, 5, 10, 15];
+
 export default function PreisePage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
@@ -39,6 +50,26 @@ export default function PreisePage() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal>
+        <div className="mt-10">
+          <h2 className="text-center font-display text-lg font-semibold text-ink-900">
+            Was das im Monat konkret heißt
+          </h2>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
+            {EXAMPLE_TEAM_SIZES.map((n) => (
+              <div key={n} className="rounded-card border border-ink-100 p-4 text-center">
+                <p className="text-sm text-ink-500">{n} Mitarbeiter</p>
+                <p className="mt-1 font-display text-2xl font-semibold text-ink-900">{monthlyPrice(n)} €</p>
+                <p className="text-xs text-ink-300">pro Monat</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-center text-xs text-ink-300">
+            Alle Preise netto, zuzüglich der gesetzlichen Umsatzsteuer.
+          </p>
+        </div>
+      </Reveal>
 
       <Reveal delay={120}>
         <div className="mt-10 rounded-card bg-ink-50 p-6 text-center">

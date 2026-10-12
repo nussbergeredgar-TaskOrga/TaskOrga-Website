@@ -1,16 +1,48 @@
 import Link from "next/link";
-import { Sparkles, Palette, ShieldCheck, ArrowRight } from "lucide-react";
+import { Radar, Palette, ShieldCheck, ArrowRight, Download, Smartphone, LifeBuoy } from "lucide-react";
 import { ProductPreview } from "@/components/product-preview";
 import { Reveal } from "@/components/reveal";
 import { FeatureGrid } from "@/components/feature-grid";
 import { SOLUTIONS } from "@/lib/solutions";
 
+// AVV liegt in der App (dort wird bei der Registrierung auch zugestimmt) --
+// gleiche Logik wie beim AGB-Link im Footer.
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://app.taskorga.de";
+
+const TRUST = [
+  {
+    icon: ShieldCheck,
+    title: "Datenschutz nach DSGVO",
+    description:
+      "Der AV-Vertrag wird direkt bei der Registrierung bestätigt. Anwendung und Datenbank laufen auf Servern in der EU (Frankfurt).",
+    link: { href: `${appUrl}/avv`, label: "AV-Vertrag ansehen" },
+  },
+  {
+    icon: Download,
+    title: "Deine Daten gehören dir",
+    description:
+      "Alle Firmendaten lassen sich jederzeit exportieren (Einstellungen → Firma) — du kommst immer wieder an alles heran.",
+  },
+  {
+    icon: Smartphone,
+    title: "Auch unterwegs",
+    description:
+      "Läuft im Browser auf Handy, Tablet und PC und lässt sich wie eine App auf dem Startbildschirm installieren.",
+  },
+  {
+    icon: LifeBuoy,
+    title: "Persönlicher Ansprechpartner",
+    description:
+      "TaskOrga wird von Edgar Nussberger entwickelt und betreut. Fragen und Probleme meldest du direkt in der App — sie landen bei ihm persönlich.",
+  },
+];
+
 const HIGHLIGHTS = [
   {
-    icon: Sparkles,
-    title: "Freier Diagramm-Baukasten",
+    icon: Radar,
+    title: "Kunden-Radar: merkt, wenn dir ein Kunde wegrutscht",
     description:
-      "Keine starren Standard-Reports: gruppiere jedes Feld jedes Datentyps frei — nach Status, Zeitraum, Wertebereich oder Zuständigkeit — und behalte genau die Zahlen im Blick, die für dich zählen.",
+      "Automatische Hinweise, wenn ein Kunde lange nichts von sich hören ließ, seltener Termine hat, ein Angebot unbeantwortet bleibt oder eine Anfrage festhängt — bevor das Geschäft einschläft.",
   },
   {
     icon: Palette,
@@ -49,8 +81,9 @@ export default function HomePage() {
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-4 max-w-lg text-lg text-ink-500">
-                Kunden, Anfragen, Angebote, Aufträge, Rechnungen, Termine und Aufgaben — alles in
-                einem System statt verstreut über Excel, E-Mail und Papier.
+                Von der Anfrage bis zur Rechnung an einem Ort — statt verstreut über Excel, E-Mail und
+                Papier. Die Buchhaltung bleibt bei deinem Steuerberater, TaskOrga kümmert sich um alles
+                davor.
               </p>
             </Reveal>
             <Reveal delay={240}>
@@ -131,6 +164,40 @@ export default function HomePage() {
               </Link>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      <section id="vertrauen" className="border-t border-ink-100 bg-ink-50">
+        <div className="mx-auto max-w-6xl scroll-mt-16 px-4 py-16 sm:px-6">
+          <Reveal>
+            <h2 className="font-display text-2xl font-semibold text-ink-900">Sicher, transparent, persönlich</h2>
+            <p className="mt-2 max-w-2xl text-sm text-ink-500">
+              Deine Kundendaten sind sensibel. Deshalb legen wir offen, wo sie liegen, wie du wieder
+              an sie herankommst und wer hinter TaskOrga steht.
+            </p>
+          </Reveal>
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {TRUST.map((t, i) => (
+              <Reveal key={t.title} delay={i * 100}>
+                <div className="flex h-full flex-col rounded-card border border-ink-100 bg-surface p-5 shadow-card">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
+                    <t.icon size={20} strokeWidth={2} />
+                  </div>
+                  <h3 className="mt-4 font-display font-semibold text-ink-900">{t.title}</h3>
+                  <p className="mt-2 flex-1 text-sm text-ink-500">{t.description}</p>
+                  {t.link && (
+                    <a
+                      href={t.link.href}
+                      className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand-700 hover:underline"
+                    >
+                      {t.link.label}
+                      <ArrowRight size={14} />
+                    </a>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

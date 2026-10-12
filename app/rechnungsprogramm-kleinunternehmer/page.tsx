@@ -39,6 +39,10 @@ const FEATURES = [
 
 const FAQ = [
   {
+    q: "Ersetzt TaskOrga meine Buchhaltung?",
+    a: "Nein. TaskOrga erstellt und verfolgt Rechnungen, ist aber keine Buchhaltung: keine Belegerfassung, kein Banking, keine Umsatzsteuer-Voranmeldung. Die Buchhaltung macht weiter dein Steuerberater oder deine Buchhaltungssoftware.",
+  },
+  {
     q: "Ist TaskOrga für die Kleinunternehmerregelung geeignet?",
     a: "Ja. Der Mehrwertsteuer-Ausweis auf Rechnungen und Angeboten lässt sich in den Firmeneinstellungen zentral ein- oder ausschalten — passend zu §19 UStG.",
   },
@@ -62,9 +66,9 @@ export default function RechnungsprogrammKleinunternehmerPage() {
             Rechnungsprogramm für Kleinunternehmer
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-ink-500">
-            Rechnungen und Angebote professionell erstellen, Zahlungen im Blick behalten und
-            überfällige Beträge automatisch nachfassen lassen — ohne Buchhaltungssoftware, die für
-            ein kleines Unternehmen überdimensioniert ist.
+            Rechnungen entstehen direkt aus deinem Angebot oder Auftrag — ohne Daten doppelt zu
+            tippen. Zahlungen behältst du im Blick, überfällige Beträge werden automatisch
+            nachgefasst. Die Buchhaltung bleibt bei deinem Steuerberater.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link
