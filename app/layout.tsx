@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 // Hilft Google, die Seite als konkretes Software-Produkt statt als generische
 // Seite einzuordnen (Grundlage fuer Rich-Snippets, z.B. Preis-Anzeige direkt
 // im Suchergebnis). Startpreis entspricht der guenstigsten Staffel-Stufe auf
-// /preise (19 € je Mitarbeiter/Monat fuer die ersten 4 Mitarbeiter).
+// /preise (10 € je Mitarbeiter/Monat fuer die ersten 9 Mitarbeiter).
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -65,7 +65,7 @@ const structuredData = {
     "Kunden, Anfragen, Angebote, Aufträge, Rechnungen, Termine und Aufgaben an einem Ort für Selbstständige und kleine Unternehmen.",
   offers: {
     "@type": "Offer",
-    price: "19",
+    price: "10",
     priceCurrency: "EUR",
     priceValidUntil: "2027-12-31",
     url: `${siteUrl}/preise`,

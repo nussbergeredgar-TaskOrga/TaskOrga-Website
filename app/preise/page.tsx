@@ -7,22 +7,32 @@ export const metadata: Metadata = {
   description: "Ein transparenter Preis pro Mitarbeiter, gestaffelt nach Teamgröße. 14 Tage kostenlos testen, ohne Kreditkarte.",
 };
 
-const TIERS = [
-  { range: "1–4 Mitarbeiter", price: "19", note: "pro Mitarbeiter / Monat" },
-  { range: "5–10 Mitarbeiter", price: "14", note: "pro Mitarbeiter / Monat" },
-  { range: "ab 11 Mitarbeitern", price: "9", note: "pro Mitarbeiter / Monat, ohne Obergrenze" },
+// Eine Quelle fuer Anzeige und Beispielrechnung. Gestaffelt und kumulativ (wie
+// in den FAQ unten und in lib/subscription-pricing.ts der App): Der Preis richtet
+// sich nach der Position des Mitarbeiters, nicht nach der Gesamtzahl. Muss mit
+// dem gestaffelten Stripe-Preis uebereinstimmen (scripts/setup-stripe-price.js).
+const BANDS: { from: number; to: number | null; price: number }[] = [
+  { from: 1, to: 9, price: 10 },
+  { from: 10, to: 24, price: 9 },
+  { from: 25, to: 50, price: 8 },
+  { from: 51, to: null, price: 7 },
 ];
 
-// Gestaffelt und kumulativ, wie in den FAQ unten beschrieben (und in
-// lib/subscription-pricing.ts der App): Stufe richtet sich nach der Position
-// des Mitarbeiters, nicht nach der Gesamtzahl.
+const TIERS = BANDS.map((b) => ({
+  range: b.to === null ? `ab ${b.from} Mitarbeitern` : `${b.from}–${b.to} Mitarbeiter`,
+  price: String(b.price),
+  note: b.to === null ? "pro Mitarbeiter / Monat, ohne Obergrenze" : "pro Mitarbeiter / Monat",
+}));
+
 function monthlyPrice(employees: number): number {
   let total = 0;
-  for (let i = 1; i <= employees; i++) total += i <= 4 ? 19 : i <= 10 ? 14 : 9;
+  for (let i = 1; i <= employees; i++) {
+    total += BANDS.find((b) => i >= b.from && (b.to === null || i <= b.to))!.price;
+  }
   return total;
 }
 
-const EXAMPLE_TEAM_SIZES = [1, 3, 5, 10, 15];
+const EXAMPLE_TEAM_SIZES = [1, 5, 10, 25, 50];
 
 export default function PreisePage() {
   return (
@@ -39,7 +49,7 @@ export default function PreisePage() {
         </div>
       </Reveal>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {TIERS.map((t, i) => (
           <Reveal key={t.range} delay={i * 120}>
             <div className="rounded-card border border-ink-100 p-6 text-center shadow-card">
@@ -91,9 +101,9 @@ export default function PreisePage() {
             <div>
               <p className="font-medium text-ink-900">Wie wird abgerechnet?</p>
               <p className="text-ink-500">
-                Gestaffelt und kumulativ: die ersten 4 Mitarbeiter kosten je 19 €, der 5. bis 10.
-                je 14 €, ab dem 11. Mitarbeiter ohne Obergrenze je 9 € — automatisch passend zu
-                deiner aktuellen Teamgröße.
+                Gestaffelt und kumulativ: die ersten 9 Mitarbeiter kosten je 10 €, der 10. bis 24.
+                je 9 €, der 25. bis 50. je 8 €, ab dem 51. Mitarbeiter ohne Obergrenze je 7 € —
+                automatisch passend zu deiner aktuellen Teamgröße.
               </p>
             </div>
             <div>
