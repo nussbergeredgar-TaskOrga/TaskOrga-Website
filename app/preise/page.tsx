@@ -111,6 +111,14 @@ export default function PreisePage() {
               <p className="text-ink-500">Nein. Du kannst 14 Tage lang alles testen, ohne Zahlungsdaten zu hinterlegen.</p>
             </div>
             <div>
+              <p className="font-medium text-ink-900">Was passiert nach den 14 Tagen?</p>
+              <p className="text-ink-500">
+                Nichts wird automatisch abgebucht oder verlängert. Ohne abgeschlossenes Abo wird dein
+                Zugang gesperrt. Du kannst dann jederzeit ein Abo abschließen, deine Daten exportieren
+                oder dein Konto löschen.
+              </p>
+            </div>
+            <div>
               <p className="font-medium text-ink-900">Kann ich jederzeit kündigen?</p>
               <p className="text-ink-500">Ja, monatlich kündbar, keine Mindestlaufzeit.</p>
             </div>
