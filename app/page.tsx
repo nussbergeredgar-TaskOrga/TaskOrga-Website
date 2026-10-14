@@ -33,7 +33,7 @@ const TRUST = [
     icon: LifeBuoy,
     title: "Persönlicher Ansprechpartner",
     description:
-      "TaskOrga wird von Edgar Nussberger entwickelt und betreut. Fragen und Probleme meldest du direkt im System — sie landen bei einem echten Mitarbeiter. Bei größeren Problemen helfen wir dir auch direkt in deinem System.",
+      "Fragen und Probleme meldest du direkt im System — sie landen bei einem echten Mitarbeiter. Bei größeren Problemen helfen wir dir auch direkt in deinem System.",
   },
 ];
 
