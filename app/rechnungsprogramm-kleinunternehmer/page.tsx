@@ -68,7 +68,7 @@ export default function RechnungsprogrammKleinunternehmerPage() {
           <p className="mx-auto mt-3 max-w-xl text-ink-500">
             Rechnungen entstehen direkt aus deinem Angebot oder Auftrag — ohne Daten doppelt zu
             tippen. Zahlungen behältst du im Blick, überfällige Beträge werden automatisch
-            nachgefasst. Die Buchhaltung bleibt bei deinem Steuerberater.
+            nachgefasst.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <Link

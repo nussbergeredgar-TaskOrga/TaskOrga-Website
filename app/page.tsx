@@ -21,7 +21,7 @@ const TRUST = [
     icon: Download,
     title: "Deine Daten gehören dir",
     description:
-      "Alle Firmendaten lassen sich jederzeit exportieren (Einstellungen → Firma) — du kommst immer wieder an alles heran.",
+      "Alle Firmendaten lassen sich jederzeit exportieren — du kommst immer wieder an alles heran.",
   },
   {
     icon: Smartphone,
@@ -33,7 +33,7 @@ const TRUST = [
     icon: LifeBuoy,
     title: "Persönlicher Ansprechpartner",
     description:
-      "TaskOrga wird von Edgar Nussberger entwickelt und betreut. Fragen und Probleme meldest du direkt in der App — sie landen bei ihm persönlich.",
+      "TaskOrga wird von Edgar Nussberger entwickelt und betreut. Fragen und Probleme meldest du direkt im System — sie landen bei einem echten Mitarbeiter. Bei größeren Problemen helfen wir dir auch direkt in deinem System.",
   },
 ];
 
@@ -82,8 +82,8 @@ export default function HomePage() {
             <Reveal delay={160}>
               <p className="mt-4 max-w-lg text-lg text-ink-500">
                 Von der Anfrage bis zur Rechnung an einem Ort — statt verstreut über Excel, E-Mail und
-                Papier. Die Buchhaltung bleibt bei deinem Steuerberater, TaskOrga kümmert sich um alles
-                davor.
+                Papier. So behältst du den Überblick und hast mehr Zeit für das, was dein Geschäft
+                wirklich voranbringt.
               </p>
             </Reveal>
             <Reveal delay={240}>
